@@ -1,0 +1,1 @@
+# projeto_arquitetura_rabbitmq
