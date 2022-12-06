@@ -1,5 +1,4 @@
-import { Box, Grid, TextField, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Grid, TextField, Button, Link } from "@mui/material";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -27,7 +26,7 @@ export function CreateAttachment() {
 	};
 
 	return (
-		<Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
+		<Box component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
 			<Grid container spacing={2}>
 				<Grid item xs={12}>
 					<TextField
@@ -90,13 +89,13 @@ export function CreateAttachment() {
 						{...register("base64")}
 					/>
 				</Grid>
-			</Grid>
-			<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-				Create Attachment
-			</Button>
-			<Grid container justifyContent="flex-end">
-				<Grid item>
-					<Link to="/attachment/all">Cancel</Link>
+				<Grid item xs={12} display="flex" justifyContent="flex-end" alignItems="center">
+					<Link href="/attachments/all" underline="none">
+						Cancel
+					</Link>
+					<Button type="submit" variant="contained" sx={{ ml: 3 }}>
+						Create Attachment
+					</Button>
 				</Grid>
 			</Grid>
 		</Box>
