@@ -4,7 +4,7 @@ import { Link, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 
 export const menuItems = (
 	<>
-		<Link color="inherit" underline="none" href="new-attachment">
+		<Link color="inherit" underline="none" href="/attachments/new">
 			<ListItemButton>
 				<ListItemIcon>
 					<NoteAddIcon />
@@ -12,7 +12,7 @@ export const menuItems = (
 				<ListItemText primary="New Attachment" />
 			</ListItemButton>
 		</Link>
-		<Link color="inherit" underline="none" href="attachments-list">
+		<Link color="inherit" underline="none" href="/attachments/all">
 			<ListItemButton>
 				<ListItemIcon>
 					<LibraryBooksIcon />
