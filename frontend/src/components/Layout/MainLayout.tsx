@@ -7,8 +7,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 import { Copyright } from "./Copyright";
-import { menuItems } from "./menuItems";
 import { useDisclosure } from "../../hooks/useDisclosure";
+
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import { Link, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 const drawerWidth: number = 240;
 
@@ -62,6 +65,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== "open" })
 	},
 }));
 
+interface MenuItem {
+	link: string;
+	title: string;
+	icon: JSX.Element;
+}
+
+export const menuItems: MenuItem[] = [
+	{ link: "/attachments/new", title: "New Attachment", icon: <NoteAddIcon /> },
+	{ link: "/attachments/all", title: "Attachments List", icon: <LibraryBooksIcon /> },
+];
+
 export function MainLayout({ children }: MainLayoutProps) {
 	const { isOpen, toggle } = useDisclosure(true);
 
@@ -100,7 +114,16 @@ export function MainLayout({ children }: MainLayoutProps) {
 					</IconButton>
 				</Toolbar>
 				<Divider />
-				<List component="nav">{menuItems}</List>
+				<List component="nav">
+					{menuItems.map(item => (
+						<Link color="inherit" underline="none" href={item.link}>
+							<ListItemButton>
+								<ListItemIcon>{item.icon}</ListItemIcon>
+								<ListItemText primary={item.title} />
+							</ListItemButton>
+						</Link>
+					))}
+				</List>
 			</Drawer>
 			<Box
 				component="main"
