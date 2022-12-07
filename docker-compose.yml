@@ -1,0 +1,73 @@
+version: '3.0'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - './data/broker:/var/lib/rabbitmq/'
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=123456
+
+  attachment-api:
+    container_name: attachment-api
+    environment:
+      - --spring.datasource.url=jdbc:postgresql://postgres:5432/fila-1?serverTimezone=America/Sao_Paulo&useLegacyDatetimeCode=false
+      - --spring.datasource.username=teste
+      - --spring.datasource.password=teste
+    build:
+      context: .
+      dockerfile: ./backend/anexo/Dockerfile-anexo
+    entrypoint:
+      - java
+      - -jar
+      - /app.jar
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+
+  upload-api:
+    container_name: upload-api
+    build:
+      context: .
+      dockerfile: ./backend/upload/Dockerfile-upload
+    entrypoint:
+      - java
+      - -jar
+      - /app.jar
+    ports:
+      - '8081:8081'
+    volumes:
+      - './data/anexos:/var/lib/'
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-api
+    environment:
+      - POSTGRES_DB=fila-1
+      - POSTGRES_USER=teste
+      - POSTGRES_PASSWORD=teste
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile-frontend
+    entrypoint:
+      - npm
+      - run
+      - start
+    ports:
+      - '3000:3000'

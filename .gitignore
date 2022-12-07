@@ -1,0 +1,6 @@
+/data/database/*
+/data/broker/*
+/data/anexos/*
+
+.vscode
+.idea
