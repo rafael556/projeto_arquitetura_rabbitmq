@@ -1,0 +1,7 @@
+FROM node:alpine
+WORKDIR /app
+COPY frontend/package.json ./
+COPY ./ ./
+RUN npm i
+EXPOSE 3000
+ENTRYPOINT [ "npm", "run", "start" ]
