@@ -1,7 +1,7 @@
-import { HttpClient, HttpStatusCode } from "@/data/protocols/http";
-import { UnexpectedError } from "@/domain/errors";
-import { AttachmentModel } from "@/domain/models";
-import { LoadAttachmentList } from "@/domain/usecases";
+import { HttpClient, HttpStatusCode } from "data/protocols/http";
+import { UnexpectedError } from "domain/errors";
+import { AttachmentModel } from "domain/models";
+import { LoadAttachmentList } from "domain/usecases";
 
 export class RemoteLoadAttachmentList implements LoadAttachmentList {
 	constructor(

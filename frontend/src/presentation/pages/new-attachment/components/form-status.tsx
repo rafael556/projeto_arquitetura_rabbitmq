@@ -1,5 +1,5 @@
 import { newAttachmentState } from "./new-attachment-state";
-import { FormStatusBase } from "@/presentation/components";
+import { FormStatusBase } from "presentation/components";
 
 import React from "react";
 

@@ -1,8 +1,8 @@
 import Styles from "./attachment-list-styles.module.scss";
 
-import { LoadAttachmentList } from "@/domain/usecases";
-import { Header, Footer, Error } from "@/presentation/components";
-import { attachmentListState, AttachmentTable } from "@/presentation/pages/attachment-list/components";
+import { LoadAttachmentList } from "domain/usecases";
+import { Header, Footer, Error } from "presentation/components";
+import { attachmentListState, AttachmentTable } from "presentation/pages/attachment-list/components";
 
 import { useState, useEffect } from "react";
 

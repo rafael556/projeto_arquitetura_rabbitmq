@@ -1,6 +1,6 @@
-import { HttpClient, HttpStatusCode } from "@/data/protocols/http";
-import { AddAttachment } from "@/domain/usecases";
-import { UnexpectedError } from "@/domain/errors";
+import { HttpClient, HttpStatusCode } from "data/protocols/http";
+import { AddAttachment } from "domain/usecases";
+import { UnexpectedError } from "domain/errors";
 
 export class RemoteAddAttachment implements AddAttachment {
 	constructor(private readonly url: string, private readonly httpClient: HttpClient<RemoteAddAttachment.Model>) {}

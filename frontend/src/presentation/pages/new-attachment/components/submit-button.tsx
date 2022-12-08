@@ -1,4 +1,4 @@
-import { SubmitButtonBase } from "@/presentation/components";
+import { SubmitButtonBase } from "presentation/components";
 import { newAttachmentState } from "./new-attachment-state";
 
 import React from "react";

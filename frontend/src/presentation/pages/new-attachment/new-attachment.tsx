@@ -1,8 +1,8 @@
 import Styles from "./new-attachment-styles.module.scss";
 import { newAttachmentState, Input, SubmitButton, FormStatus } from "./components";
-import { Footer, Header } from "@/presentation/components";
-import { Validation } from "@/presentation/protocols";
-import { AddAttachment } from "@/domain/usecases";
+import { Footer, Header } from "presentation/components";
+import { Validation } from "presentation/protocols";
+import { AddAttachment } from "domain/usecases";
 
 import { Link, redirect } from "react-router-dom";
 

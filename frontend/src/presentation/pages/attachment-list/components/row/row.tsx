@@ -1,5 +1,5 @@
-import Styles from "./item-styles.module.scss";
-import { LoadAttachmentList } from "@/domain/usecases";
+import Styles from "./row-styles.module.scss";
+import { LoadAttachmentList } from "domain/usecases";
 
 import React from "react";
 

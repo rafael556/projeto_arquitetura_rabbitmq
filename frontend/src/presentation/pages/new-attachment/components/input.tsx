@@ -1,4 +1,4 @@
-import { InputBase } from "@/presentation/components";
+import { InputBase } from "presentation/components";
 
 import React, { useState } from "react";
 import { newAttachmentState } from "./new-attachment-state";

@@ -1,4 +1,4 @@
-import { AttachmentModel } from "@/domain/models";
+import { AttachmentModel } from "domain/models";
 
 export interface AddAttachment {
 	add: (params: AddAttachment.Params) => Promise<AddAttachment.Model>;
