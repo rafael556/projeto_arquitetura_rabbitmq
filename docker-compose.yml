@@ -31,6 +31,7 @@ services:
       - '8080:8080'
     depends_on:
       - postgres
+      - rabbitmq
 
   upload-api:
     container_name: upload-api
@@ -47,6 +48,8 @@ services:
       - './data/anexos:/var/lib/'
     depends_on:
       - postgres
+      - rabbitmq
+      - attachment-api
 
   postgres:
     image: postgres:latest
