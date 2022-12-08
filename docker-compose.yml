@@ -37,15 +37,13 @@ services:
     container_name: upload-api
     build:
       context: .
-      dockerfile: ./backend/upload/Dockerfile-upload
+      dockerfile: ./backend/upload-node/Dockerfile-frontend
+    env_file:
+      - ./backend/upload-node/.env
     entrypoint:
-      - java
-      - -jar
-      - /app.jar
-    ports:
-      - '8081:8081'
-    volumes:
-      - './data/anexos:/var/lib/'
+      - npm
+      - run
+      - start
     depends_on:
       - postgres
       - rabbitmq

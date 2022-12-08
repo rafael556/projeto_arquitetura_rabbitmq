@@ -1,0 +1,6 @@
+FROM node:alpine
+WORKDIR /app
+COPY backend/upload-node/package.json ./
+COPY ./ ./
+RUN npm i
+ENTRYPOINT [ "npm", "run", "start" ]
