@@ -1,9 +1,14 @@
 @import "../../../../styles/colors.scss";
 
 .tableEmpty {
+	width: 100%;
 	display: inline-block;
 	padding-top: 48px;
 	padding-bottom: 48px;
 	font-size: 18px;
 	color: $disabledColor;
+
+	td {
+		width: 100%;
+	}
 }

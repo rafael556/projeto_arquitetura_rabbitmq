@@ -1,12 +1,18 @@
-.tableWrap {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
+@import "../../../../styles/colors.scss";
 
-@media only screen and (max-width: 600px) {
-	.tableWrap {
-		flex-direction: column;
+.tableWrap {
+	width: 100%;
+
+	thead {
+		border-top: 2px solid $primaryDark;
+		border-bottom: 2px solid $primaryDark;
+
+		th {
+			text-transform: uppercase;
+			text-align: center;
+			padding: 10px;
+			color: $black;
+			border: 1px solid $disabledBackground;
+		}
 	}
 }
