@@ -1,0 +1,18 @@
+@import "../../../../styles/colors.scss";
+
+.attachmentTableRow {
+	border-bottom: 1px solid $disabledBackground;
+
+	td {
+		padding: 10px;
+		border: 1px solid $disabledBackground;
+	}
+	th {
+		padding-left: 10px;
+		border: 1px solid $disabledBackground;
+	}
+
+	&:nth-child(odd) {
+		background-color: $background;
+	}
+}

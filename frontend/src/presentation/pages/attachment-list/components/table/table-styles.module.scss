@@ -1,0 +1,18 @@
+@import "../../../../styles/colors.scss";
+
+.tableWrap {
+	width: 100%;
+
+	thead {
+		border-top: 2px solid $primaryDark;
+		border-bottom: 2px solid $primaryDark;
+
+		th {
+			text-transform: uppercase;
+			text-align: center;
+			padding: 10px;
+			color: $black;
+			border: 1px solid $disabledBackground;
+		}
+	}
+}
