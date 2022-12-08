@@ -1,5 +1,4 @@
 import amqp from 'amqplib'
-import { Base64 } from 'js-base64'
 const AWS = require('aws-sdk')
 const fs = require('fs')
 require('dotenv').config()
@@ -38,7 +37,8 @@ async function uploadFile(fileName: string, base64: string) {
     Bucket: process.env.AWS_S3_BUCKET,
     Key: fileName,
     Body: fileContent,
-    ContentType: contentTypeParam
+    ContentType: contentTypeParam,
+    ACL: 'public-read'
   }
 
   console.log(params)
