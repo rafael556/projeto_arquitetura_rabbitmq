@@ -1,14 +1,13 @@
 import React from "react";
+
+import "presentation/styles/global.scss";
+
+import { Router } from "main/routes";
 import ReactDOM from "react-dom/client";
 
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
-root.render(
+const main = ReactDOM.createRoot(document.getElementById("main") as HTMLElement);
+main.render(
 	<React.StrictMode>
-		<App />
+		<Router />
 	</React.StrictMode>
 );
-
-reportWebVitals();
