@@ -6,6 +6,7 @@ import { AttachmentTable, attachmentListState } from "presentation/pages/attachm
 
 import { useRecoilState, useResetRecoilState } from "recoil";
 import React, { useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
 	loadAttachmentList: LoadAttachmentList;
@@ -38,7 +39,12 @@ const AttachmentList: React.FC<Props> = ({ loadAttachmentList }: Props) => {
 		<div className={Styles.attachmentListWrap}>
 			<Header />
 			<div className={Styles.contentWrap}>
-				<h2>Anexos</h2>
+				<div className={Styles.contentHeader}>
+					<h2>Anexos</h2>
+					<Link to="/new-attachment">
+						<button type="button">Adicionar</button>
+					</Link>
+				</div>
 				{state.error ? (
 					<Error error={state.error} reload={reload} />
 				) : (
