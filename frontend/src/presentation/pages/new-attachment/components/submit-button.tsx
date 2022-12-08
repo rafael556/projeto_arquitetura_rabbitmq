@@ -1,6 +1,7 @@
 import { SubmitButtonBase } from "presentation/components";
 import { newAttachmentState } from "./new-attachment-state";
 
+import { useRecoilValue } from "recoil";
 import React from "react";
 
 type Props = {
@@ -8,7 +9,9 @@ type Props = {
 };
 
 const SubmitButton: React.FC<Props> = ({ text }: Props) => {
-	return <SubmitButtonBase text={text} state={newAttachmentState} />;
+	const state = useRecoilValue(newAttachmentState);
+
+	return <SubmitButtonBase text={text} state={state} />;
 };
 
 export default SubmitButton;

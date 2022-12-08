@@ -2,29 +2,37 @@ import Styles from "./attachment-list-styles.module.scss";
 
 import { LoadAttachmentList } from "domain/usecases";
 import { Header, Footer, Error } from "presentation/components";
-import { attachmentListState, AttachmentTable } from "presentation/pages/attachment-list/components";
+import { AttachmentTable, attachmentListState } from "presentation/pages/attachment-list/components";
 
-import { useState, useEffect } from "react";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import React, { useCallback, useEffect } from "react";
 
 type Props = {
 	loadAttachmentList: LoadAttachmentList;
 };
 
 const AttachmentList: React.FC<Props> = ({ loadAttachmentList }: Props) => {
-	const [state, setState] = useState(attachmentListState);
+	const resetAttachmentListState = useResetRecoilState(attachmentListState);
 
-	const handleError = (error: Error) => {
-		setState(old => ({ ...old, error: error.message }));
-	};
+	const [state, setState] = useRecoilState(attachmentListState);
+
+	const handleError = useCallback(
+		(error: Error) => {
+			setState(old => ({ ...old, error: error.message }));
+		},
+		[setState]
+	);
 
 	const reload = (): void => setState(old => ({ attachments: [], error: "", reload: !old.reload }));
+
+	useEffect(() => resetAttachmentListState(), [resetAttachmentListState]);
 
 	useEffect(() => {
 		loadAttachmentList
 			.loadAll()
 			.then(attachments => setState(old => ({ ...old, attachments })))
 			.catch(handleError);
-	}, [loadAttachmentList, state.reload]);
+	}, [handleError, loadAttachmentList, setState, state.reload]);
 
 	return (
 		<div className={Styles.attachmentListWrap}>

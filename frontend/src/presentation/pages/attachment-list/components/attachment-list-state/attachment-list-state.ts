@@ -1,7 +1,12 @@
 import { LoadAttachmentList } from "domain/usecases";
 
-export const attachmentListState = {
-	attachments: [] as LoadAttachmentList.Model[],
-	error: "",
-	reload: false,
-};
+import { atom } from "recoil";
+
+export const attachmentListState = atom({
+	key: "attachmentListState",
+	default: {
+		attachments: [] as LoadAttachmentList.Model[],
+		error: "",
+		reload: false,
+	},
+});

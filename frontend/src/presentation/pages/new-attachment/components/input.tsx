@@ -1,7 +1,8 @@
+import { newAttachmentState } from "./new-attachment-state";
 import { InputBase } from "presentation/components";
 
-import React, { useState } from "react";
-import { newAttachmentState } from "./new-attachment-state";
+import { useRecoilState } from "recoil";
+import React from "react";
 
 type Props = {
 	type: string;
@@ -10,7 +11,7 @@ type Props = {
 };
 
 const Input: React.FC<Props> = ({ type, name, placeholder }: Props) => {
-	const [state, setState] = useState(newAttachmentState);
+	const [state, setState] = useRecoilState(newAttachmentState);
 
 	return <InputBase type={type} name={name} placeholder={placeholder} state={state} setState={setState} />;
 };

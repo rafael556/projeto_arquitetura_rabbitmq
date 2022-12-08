@@ -17,6 +17,7 @@ const Input: React.FC<Props> = ({ state, setState, ...props }: Props) => {
 				{...props}
 				ref={inputRef}
 				title={error}
+				placeholder=" "
 				readOnly
 				onFocus={e => {
 					e.target.readOnly = false;

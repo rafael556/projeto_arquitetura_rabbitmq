@@ -6,7 +6,8 @@ import { AddAttachment } from "domain/usecases";
 
 import { Link, redirect } from "react-router-dom";
 
-import React, { useCallback, useEffect, useState } from "react";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import React, { useEffect } from "react";
 import { AxiosError } from "axios";
 
 type Props = {
@@ -15,28 +16,35 @@ type Props = {
 };
 
 const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) => {
-	const [state, setState] = useState(newAttachmentState);
+	const resetNewAttachmentState = useResetRecoilState(newAttachmentState);
 
-	const validate = useCallback(
-		(field: string): void => {
-			const { responsible, date, documentType, subject, justification, base64 } = state;
-			const formData = { responsible, date, documentType, subject, justification, base64 };
+	const [state, setState] = useRecoilState(newAttachmentState);
 
-			setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, formData) }));
+	useEffect(() => resetNewAttachmentState(), []);
+	useEffect(() => validate("responsible"), [state.responsible]);
+	useEffect(() => validate("date"), [state.date]);
+	useEffect(() => validate("documentType"), [state.documentType]);
+	useEffect(() => validate("subject"), [state.subject]);
+	useEffect(() => validate("justification"), [state.justification]);
+	useEffect(() => validate("base64"), [state.base64]);
 
-			setState(old => ({
-				...old,
-				isFormInvalid:
-					!!old.responsibleError ||
-					!!old.dateError ||
-					!!old.documentTypeError ||
-					!!old.subjectError ||
-					!!old.justificationError ||
-					!!old.base64Error,
-			}));
-		},
-		[state, validation]
-	);
+	const validate = (field: string): void => {
+		const { responsible, date, documentType, subject, justification, base64 } = state;
+		const formData = { responsible, date, documentType, subject, justification, base64 };
+
+		setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, formData) }));
+
+		setState(old => ({
+			...old,
+			isFormInvalid:
+				!!old.responsibleError ||
+				!!old.dateError ||
+				!!old.documentTypeError ||
+				!!old.subjectError ||
+				!!old.justificationError ||
+				!!old.base64Error,
+		}));
+	};
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		event.preventDefault();
@@ -67,24 +75,18 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 		}
 	};
 
-	useEffect(() => validate("responsible"), [state.responsible, validate]);
-	useEffect(() => validate("date"), [state.date, validate]);
-	useEffect(() => validate("documentType"), [state.documentType, validate]);
-	useEffect(() => validate("subject"), [state.subject, validate]);
-	useEffect(() => validate("justification"), [state.justification, validate]);
-	useEffect(() => validate("base64"), [state.base64, validate]);
-
 	return (
 		<div className={Styles.signupWrap}>
 			<Header />
-			<form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
+			<form className={Styles.form} onSubmit={handleSubmit}>
 				<h2>Adicionar Anexo</h2>
 
-				<Input type="date" name="date" placeholder="Digite a date" />
-				<Input type="text" name="documentType" placeholder="Digite a documentType" />
+				<Input type="text" name="responsible" placeholder="Digite a nome do responsável" />
+				<Input type="date" name="date" placeholder="Digite a data" />
+				<Input type="text" name="documentType" placeholder="Digite o tipo de documento" />
 				<Input type="text" name="subject" placeholder="Digite a subject" />
-				<Input type="text" name="justification" placeholder="Digite a justification" />
-				<Input type="text" name="base64" placeholder="Digite a base64" />
+				<Input type="text" name="justification" placeholder="Digite a justificativa" />
+				<Input type="text" name="base64" placeholder="Insira o arquivo" />
 
 				<SubmitButton text="Cadastrar" />
 				<Link to="/attachments" className={Styles.link}>
