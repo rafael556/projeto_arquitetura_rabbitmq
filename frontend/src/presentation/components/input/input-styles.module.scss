@@ -54,6 +54,19 @@
 		&:not(:placeholder-shown) + label {
 			transform: scale(0.9) translateY(-20px);
 		}
+
+		&[type="date"] {
+			border: none;
+			color: $disabledColor;
+
+			&::-webkit-calendar-picker-indicator {
+				filter: invert(0.3);
+			}
+		}
+
+		&:focus-visible {
+			outline: none;
+		}
 	}
 
 	label {
