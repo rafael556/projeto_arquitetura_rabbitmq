@@ -5,7 +5,7 @@ import { Footer, Header } from "presentation/components";
 import { Validation } from "presentation/protocols";
 import { AddAttachment } from "domain/usecases";
 
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useRecoilState, useResetRecoilState } from "recoil";
 import React, { useEffect } from "react";
@@ -18,6 +18,8 @@ type Props = {
 
 const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) => {
 	const resetNewAttachmentState = useResetRecoilState(newAttachmentState);
+
+	const navigate = useNavigate();
 
 	const [state, setState] = useRecoilState(newAttachmentState);
 
@@ -63,7 +65,7 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 				base64: state.base64,
 			});
 
-			redirect("/attachments");
+			navigate("/attachments");
 		} catch (error) {
 			const err = error as AxiosError;
 
