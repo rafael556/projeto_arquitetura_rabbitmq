@@ -53,6 +53,7 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 				return;
 			}
 			setState(old => ({ ...old, isLoading: true }));
+
 			await addAttachment.add({
 				responsible: state.responsible,
 				date: new Date(),
@@ -84,7 +85,7 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 				<Input type="text" name="documentType" placeholder="Digite o tipo de documento" />
 				<Input type="text" name="subject" placeholder="Digite a subject" />
 				<Input type="text" name="justification" placeholder="Digite a justificativa" />
-				<Input type="text" name="base64" placeholder="Insira o arquivo" />
+				<Input type="file" name="base64" placeholder="Escolha o arquivo" />
 
 				<SubmitButton text="Cadastrar" />
 				<Link to="/attachments" className={Styles.link}>
