@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Styles from "./new-attachment-styles.module.scss";
 import { newAttachmentState, Input, SubmitButton, FormStatus } from "./components";
 import { Footer, Header } from "presentation/components";
@@ -22,15 +23,14 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 
 	useEffect(() => resetNewAttachmentState(), []);
 	useEffect(() => validate("responsible"), [state.responsible]);
-	useEffect(() => validate("date"), [state.date]);
 	useEffect(() => validate("documentType"), [state.documentType]);
 	useEffect(() => validate("subject"), [state.subject]);
 	useEffect(() => validate("justification"), [state.justification]);
 	useEffect(() => validate("base64"), [state.base64]);
 
 	const validate = (field: string): void => {
-		const { responsible, date, documentType, subject, justification, base64 } = state;
-		const formData = { responsible, date, documentType, subject, justification, base64 };
+		const { responsible, documentType, subject, justification, base64 } = state;
+		const formData = { responsible, documentType, subject, justification, base64 };
 
 		setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, formData) }));
 
@@ -38,7 +38,6 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 			...old,
 			isFormInvalid:
 				!!old.responsibleError ||
-				!!old.dateError ||
 				!!old.documentTypeError ||
 				!!old.subjectError ||
 				!!old.justificationError ||
@@ -56,7 +55,7 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 			setState(old => ({ ...old, isLoading: true }));
 			await addAttachment.add({
 				responsible: state.responsible,
-				date: state.date,
+				date: new Date(),
 				documentType: state.documentType,
 				subject: state.subject,
 				justification: state.justification,
@@ -82,7 +81,6 @@ const NewAttachment: React.FC<Props> = ({ validation, addAttachment }: Props) =>
 				<h2>Adicionar Anexo</h2>
 
 				<Input type="text" name="responsible" placeholder="Digite a nome do responsável" />
-				<Input type="date" name="date" placeholder="Digite a data" />
 				<Input type="text" name="documentType" placeholder="Digite o tipo de documento" />
 				<Input type="text" name="subject" placeholder="Digite a subject" />
 				<Input type="text" name="justification" placeholder="Digite a justificativa" />
