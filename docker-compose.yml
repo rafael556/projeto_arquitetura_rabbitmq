@@ -22,7 +22,7 @@ services:
       - --spring.datasource.password=teste
     build:
       context: .
-      dockerfile: ./backend/anexo/Dockerfile-anexo
+      dockerfile: ./backend/anexo/Dockerfile.anexo
     entrypoint:
       - java
       - -jar
@@ -37,7 +37,7 @@ services:
     container_name: upload-api
     build:
       context: .
-      dockerfile: ./backend/upload-node/Dockerfile-frontend
+      dockerfile: ./backend/upload-node/Dockerfile.upload
     env_file:
       - ./backend/upload-node/.env
     entrypoint:
@@ -65,7 +65,7 @@ services:
     container_name: frontend
     build:
       context: .
-      dockerfile: ./frontend/Dockerfile-frontend
+      dockerfile: ./frontend/Dockerfile.frontend
     entrypoint:
       - npm
       - run

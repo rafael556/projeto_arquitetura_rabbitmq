@@ -34,7 +34,7 @@ public class AttachmentService {
         attachment.setDocumentType(attachmentInputDTO.getDocumentType());
 
         String filename = attachment.getId()+"."+attachment.getDocumentType();
-        attachment.setFileUrl("http://localhost:8081/anexos"+filename);
+        attachment.setFileUrl("https://arq-fila-rabbit.s3.sa-east-1.amazonaws.com/"+filename);
 
         AttachmentUploadDTO attachmentUploadDTO = new AttachmentUploadDTO(filename, attachmentInputDTO.getBase64());
         rabbitMQService.sendMessage("attachment", attachmentUploadDTO);

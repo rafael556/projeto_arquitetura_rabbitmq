@@ -27,11 +27,6 @@ async function uploadFile(fileName: string, base64: string) {
       const t = '../app.env'
       break
   }
-  // console.log(process.env)
-  console.log(process.env.ENV_1)
-  console.log(process.env.ENV_2)
-  console.log(process.env.ENV_3)
-  console.log(process.env.ENV_4)
 
   const params = {
     Bucket: process.env.AWS_S3_BUCKET,
@@ -40,8 +35,6 @@ async function uploadFile(fileName: string, base64: string) {
     ContentType: contentTypeParam,
     ACL: 'public-read'
   }
-
-  console.log(params)
 
   const data = await s3.upload(params).promise()
   console.log(data.Location)
